@@ -1,0 +1,65 @@
+{
+	"root": true,
+	"env": {
+		"jest": true,
+		"es2021": true
+	},
+	"settings": {
+		"import/parsers": {
+			"@typescript-eslint/parser": [".ts", ".tsx"]
+		},
+		"import/resolver": {
+			"typescript": {
+				"alwaysTryTypes": true,
+				"project": "./tsconfig.json"
+			}
+		}
+	},
+	"extends": [
+		"plugin:react/recommended",
+		"airbnb"
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": 12,
+		"sourceType": "module"
+	},
+	"plugins": [
+		"react",
+		"react-native",
+		"@typescript-eslint"
+	],
+	"rules": {
+		"indent": ["error", "tab"],
+		"no-tabs": ["error", { "allowIndentationTabs": true }],
+		"react/jsx-indent": [2, "tab"],
+		"max-len": ["error", { "code": 150, "tabWidth": 4 }],
+		"eol-last": ["error", "never"],
+		"react/jsx-curly-brace-presence": ["error", { "props": "always", "children": "always", "propElementValues": "always" }],
+		"arrow-parens": ["error", "as-needed"],
+		"arrow-body-style": "off",
+		"lines-between-class-members": "off",
+		"linebreak-style": ["error", "unix"],
+		"comma-dangle": ["error", {
+			"arrays": "never",
+			"objects": "always",
+			"imports": "never",
+			"exports": "never",
+			"functions": "never"
+		}],
+		"import/extensions": [
+			"error",
+			"ignorePackages",
+			{
+				"js": "never",
+				"jsx": "never",
+				"ts": "never",
+				"tsx": "never"
+			}
+		],
+		"react/jsx-filename-extension": [1, { "extensions": [".tsx"] }]
+	}
+}
