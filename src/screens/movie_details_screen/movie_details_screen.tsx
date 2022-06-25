@@ -11,7 +11,6 @@ import { Divider, MovieCoverHeader, MovieTitle } from 'src/components';
 import { Logger } from 'src/utils/helpers';
 import { MovieDetailsScreenProps, Optional } from 'src/types';
 import { MovieDetails } from 'src/models/movie_details';
-import ApiUrls from 'src/constants/api_urls';
 
 const movieDetailsScreenStyles = StyleSheet.create({
 	safeAreaView: {
@@ -69,7 +68,7 @@ export default function MovieDetailsScreen(props: MovieDetailsScreenProps) {
 	return (
 		<SafeAreaView style={movieDetailsScreenStyles.safeAreaView}>
 			<ScrollView>
-				<MovieCoverHeader cover={ApiUrls.getImageUrl(cover)} onFavoriteIconClick={handleFavoriteIconClick} isLiked={isLiked} />
+				<MovieCoverHeader cover={cover} onFavoriteIconClick={handleFavoriteIconClick} isLiked={isLiked} />
 				<View style={movieDetailsScreenStyles.movieTitleWithDescriptionContainer}>
 					<MovieTitle duration={duration} releaseDate={releaseDate} score={score} title={title} />
 					<View style={movieDetailsScreenStyles.dividerContainer}>
