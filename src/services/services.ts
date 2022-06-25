@@ -1,16 +1,55 @@
-import { Movie } from 'src/models';
-import { MovieDetailsDTO } from 'src/models/dtos/movie_details_dto';
+import { MovieByGenre } from 'src/models/movie_by_genre';
+import { MovieDetails } from 'src/models/movie_details';
+import { MovieDetailsDTO, MoviesByGenreDTO } from 'src/models/movie_dtos';
+import { Logger } from 'src/utils/helpers';
+import MovieFactory from 'src/models/factories/movie_factory';
+import { Map, Optional } from 'src/types';
+import api from 'src/services/api';
+
+const cache: Map<any> = {};
 
 export default class Services {
-	private static async apiFetch<T>(endpoint: string): Promise<T> {
-		const response = await fetch(`https://api.themoviedb.org/3/${endpoint}?api_key=`);
+	private static async apiFetch<T>(endpoint: string, params: any): Promise<Optional<T>> {
+		let data: T | null = null;
+		let cacheKey: string;
+		let cachedData: | undefined;
 
-		return response.json();
+		try {
+			cacheKey = `${endpoint}/${Object.entries(params).map(param => `${param[0]}=${param[1]}`).sort()}`;
+			cachedData = cache[cacheKey];
+
+			if (cachedData) {
+				return cachedData;
+			}
+
+			data = (await api.get(endpoint, { params })).data;
+			cache[cacheKey] = data;
+
+			Logger.info('fetched', cacheKey, 'at', new Date().toUTCString());
+		} catch (e) {
+			Logger.error(e);
+		}
+
+		return data;
 	}
 
-	public static async getMovieWithDetails(movieId: number | string): Promise<Movie> {
-		const json = await Services.apiFetch<MovieDetailsDTO>(`movie/${movieId}`);
+	public static async getMovieWithDetails(movieId: number | string): Promise<Optional<MovieDetails>> {
+		const data = await Services.apiFetch<MovieDetailsDTO>(`movie/${movieId}`, {});
 
-		return new Movie(json);
+		if (!data) {
+			return null;
+		}
+
+		return MovieFactory.fromMovieDetailsDTO(data);
+	}
+
+	public static async getMoviesByGenre(genre: number): Promise<Optional<MovieByGenre[]>> {
+		const data = await Services.apiFetch<MoviesByGenreDTO>('discover/movie', { with_genres: genre });
+
+		if (!data) {
+			return null;
+		}
+
+		return data.results.map(movie => MovieFactory.fromMovieByGenreDTO(movie));
 	}
 }

@@ -3,7 +3,7 @@ import { BottomTabNavigationOptions, createBottomTabNavigator } from '@react-nav
 import { HeartStraight, HouseLine } from 'phosphor-react-native';
 import { FavoritesScreen } from 'src/screens';
 import { HomeStackNavigation } from 'src/navigations';
-import { BottomNavigationStack } from 'src/types/types';
+import { BottomNavigationStack } from 'src/types';
 import { Colors } from 'src/constants/theme';
 
 function getHomeTabIcon(props: { focused: boolean }) {

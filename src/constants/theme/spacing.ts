@@ -1,8 +1,8 @@
 export default class Spacing {
-	static SPACING_0: 4 = 4;
-	static SPACING_1: 8 = 8;
-	static SPACING_2: 16 = 16;
-	static SPACING_3: 24 = 24;
-	static SPACING_4: 32 = 32;
-	static SPACING_5: 40 = 40;
+	public static readonly SPACING_0: 4 = 4;
+	public static readonly SPACING_1: 8 = 8;
+	public static readonly SPACING_2: 16 = 16;
+	public static readonly SPACING_3: 24 = 24;
+	public static readonly SPACING_4: 32 = 32;
+	public static readonly SPACING_5: 40 = 40;
 }
