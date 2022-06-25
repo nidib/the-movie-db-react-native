@@ -36,20 +36,13 @@
 		"indent": ["error", "tab"],
 		"no-tabs": ["error", { "allowIndentationTabs": true }],
 		"react/jsx-indent": [2, "tab"],
+		"react/jsx-indent-props": [2, "tab"],
 		"max-len": ["error", { "code": 150, "tabWidth": 4 }],
 		"eol-last": ["error", "never"],
-		"react/jsx-curly-brace-presence": ["error", { "props": "always", "children": "always", "propElementValues": "always" }],
 		"arrow-parens": ["error", "as-needed"],
 		"arrow-body-style": "off",
 		"lines-between-class-members": "off",
 		"linebreak-style": ["error", "unix"],
-		"comma-dangle": ["error", {
-			"arrays": "never",
-			"objects": "always",
-			"imports": "never",
-			"exports": "never",
-			"functions": "never"
-		}],
 		"import/extensions": [
 			"error",
 			"ignorePackages",
@@ -60,6 +53,21 @@
 				"tsx": "never"
 			}
 		],
-		"react/jsx-filename-extension": [1, { "extensions": [".tsx"] }]
+		"react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+		"import/prefer-default-export": "off",
+		"react/jsx-fragments": ["error", "element"],
+		"object-curly-spacing": ["error", "always"],
+		"react/jsx-curly-spacing": ["error", {
+			"when": "never",
+			"children": { "when": "always" }
+		}],
+		"react/jsx-curly-brace-presence": ["error", {
+			"props": "always",
+			"children": "always"
+		}],
+		"no-unused-vars": "off",
+		"@typescript-eslint/no-unused-vars": ["error", {
+			"argsIgnorePattern": "^_"
+		}]
 	}
 }

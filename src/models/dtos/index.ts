@@ -1,0 +1,1 @@
+export { default as MovieDetailsDTO } from './movie_details_dto';
