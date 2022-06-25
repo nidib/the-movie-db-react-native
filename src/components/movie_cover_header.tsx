@@ -1,14 +1,11 @@
 import React, { useMemo } from 'react';
-import {
-	ImageBackground,
-	ImageSourcePropType,
-	StyleSheet,
-	TouchableOpacity,
-} from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { HeartStraight } from 'phosphor-react-native';
+import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import { Colors, Spacing } from 'src/constants/theme';
 import { MovieCoverHeaderProps } from 'src/types';
+import ApiUrls from 'src/constants/api_urls';
 
 const linearGradientColors = ['transparent', Colors.BLACK];
 
@@ -36,11 +33,13 @@ function MovieCoverHeader(props: MovieCoverHeaderProps) {
 		showFavoriteIcon,
 		onFavoriteIconClick,
 	} = props;
-	const backgroundSource: ImageSourcePropType = useMemo(() => ({ uri: cover ?? undefined }), [cover]);
+	const backgroundSource = useMemo(() => ({
+		uri: cover ? ApiUrls.getImageUrl(cover) : undefined,
+	}), [cover]);
 	const heartWeight = isLiked ? 'fill' : 'bold';
 
 	return (
-		<ImageBackground source={backgroundSource} style={movieCoverHeaderStyles.coverBackground}>
+		<FastImage source={backgroundSource} style={movieCoverHeaderStyles.coverBackground}>
 			<LinearGradient colors={linearGradientColors} style={movieCoverHeaderStyles.linearGradient} />
 			{
 				showFavoriteIcon && (
@@ -49,7 +48,7 @@ function MovieCoverHeader(props: MovieCoverHeaderProps) {
 					</TouchableOpacity>
 				)
 			}
-		</ImageBackground>
+		</FastImage>
 	);
 }
 
