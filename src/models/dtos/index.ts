@@ -1,0 +1,1 @@
+export { type MovieDetailsDTO } from 'src/models/dtos/movie_details_dto';
