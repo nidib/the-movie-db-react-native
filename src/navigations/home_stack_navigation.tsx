@@ -2,7 +2,7 @@ import React from 'react';
 import { createNativeStackNavigator, NativeStackNavigationOptions } from '@react-navigation/native-stack';
 import { Colors } from 'src/constants/theme';
 import { AllMoviesScreen, MovieDetailsScreenWrapper } from 'src/screens';
-import { HomeNavigationStack } from 'src/types/types';
+import { HomeNavigationStack } from 'src/types';
 
 const { Group, Navigator, Screen } = createNativeStackNavigator<HomeNavigationStack>();
 const homeStackNavigationOptions: NativeStackNavigationOptions = {

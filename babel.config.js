@@ -4,12 +4,16 @@ module.exports = {
 	],
 	plugins: [
 		[
-			'module-resolver',
-			{
+			'module-resolver', {
 				alias: {
 					src: './src',
 					root: './',
 				},
+			},
+		],
+		[
+			'module:react-native-dotenv', {
+				moduleName: 'react-native-dotenv',
 			},
 		],
 	],

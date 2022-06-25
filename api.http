@@ -1,0 +1,8 @@
+### Get a specific movie
+GET https://api.themoviedb.org/3/movie/200?api_key=
+
+### Genres
+GET https://api.themoviedb.org/3/genre/movie/list?api_key=
+
+### Movies by genre id (16) [Animation]
+GET https://api.themoviedb.org/3/discover/movie?with_genres=16&api_key=

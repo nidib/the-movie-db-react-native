@@ -6,7 +6,7 @@
 	},
 	"settings": {
 		"import/parsers": {
-			"@typescript-eslint/parser": [".ts", ".tsx"]
+			"@typescript-eslint/parser": [".ts", ".tsx", ".js"]
 		},
 		"import/resolver": {
 			"typescript": {
@@ -70,6 +70,7 @@
 			"argsIgnorePattern": "^_"
 		}],
 		"import/no-extraneous-dependencies": "off",
-		"import/no-cycle": "off"
+		"import/no-cycle": "off",
+		"prefer-const": "off"
 	}
 }

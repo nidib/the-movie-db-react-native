@@ -1,1 +1,0 @@
-export { default as Movie } from 'src/models/movie';
