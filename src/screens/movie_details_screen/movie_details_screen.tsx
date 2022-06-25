@@ -7,10 +7,11 @@ import {
 	View,
 } from 'react-native';
 import { Colors, Spacing } from 'src/constants/theme';
-import { Movie } from 'src/models';
 import { Divider, MovieCoverHeader, MovieTitle } from 'src/components';
 import { Logger } from 'src/utils/helpers';
-import { MovieDetailsScreenProps } from 'src/types/types';
+import { MovieDetailsScreenProps, Optional } from 'src/types';
+import { MovieDetails } from 'src/models/movie_details';
+import ApiUrls from 'src/constants/api_urls';
 
 const movieDetailsScreenStyles = StyleSheet.create({
 	safeAreaView: {
@@ -36,8 +37,10 @@ const movieDetailsScreenStyles = StyleSheet.create({
 export default function MovieDetailsScreen(props: MovieDetailsScreenProps) {
 	const { movieId, movieProvider } = props;
 	const [isLiked, setIsLiked] = useState(false);
-	const [movie, setMovie] = useState<Movie | null>(null);
-	const handleFavoriteIconClick = useCallback(() => setIsLiked(prevState => !prevState), []);
+	const [movie, setMovie] = useState<Optional<MovieDetails>>(null);
+	const handleFavoriteIconClick = useCallback(() => {
+		setIsLiked(prevState => !prevState);
+	}, []);
 	const getMovie = useCallback(async () => {
 		try {
 			setMovie(await movieProvider(movieId));
@@ -66,7 +69,7 @@ export default function MovieDetailsScreen(props: MovieDetailsScreenProps) {
 	return (
 		<SafeAreaView style={movieDetailsScreenStyles.safeAreaView}>
 			<ScrollView>
-				<MovieCoverHeader cover={cover} onFavoriteIconClick={handleFavoriteIconClick} isLiked={isLiked} />
+				<MovieCoverHeader cover={ApiUrls.getImageUrl(cover)} onFavoriteIconClick={handleFavoriteIconClick} isLiked={isLiked} />
 				<View style={movieDetailsScreenStyles.movieTitleWithDescriptionContainer}>
 					<MovieTitle duration={duration} releaseDate={releaseDate} score={score} title={title} />
 					<View style={movieDetailsScreenStyles.dividerContainer}>

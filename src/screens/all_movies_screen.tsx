@@ -1,20 +1,45 @@
+import React, { useCallback, useEffect, useState } from 'react';
+import {
+	SafeAreaView,
+	ScrollView,
+	Text,
+	TouchableOpacity,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import React, { useCallback } from 'react';
-import { SafeAreaView, Text, TouchableOpacity } from 'react-native';
-import { HomePropsStack } from 'src/types/types';
+import { MovieByGenre } from 'src/models/movie_by_genre';
+import Services from 'src/services/services';
+import { HomePropsStack, Optional } from 'src/types';
+import { Logger } from 'src/utils/helpers';
 
 export default function AllMoviesScreen() {
 	const navigation = useNavigation<HomePropsStack>();
-	const handleMovieItemClick = useCallback(() => {
-		navigation.navigate('MovieDetailsScreen', { movieId: 200 });
+	const [movies, setMovies] = useState<Optional<MovieByGenre[]>>([]);
+	const handleMovieItemClick = useCallback((movieId: string | number) => {
+		navigation.navigate('MovieDetailsScreen', { movieId });
 	}, []);
+
+	useEffect(() => {
+		Services.getMoviesByGenre(16)
+			.then(setMovies)
+			.catch(Logger.error);
+	}, []);
+
+	if (!movies) {
+		return <Text>{ 'Something went wrong while getting the movies' }</Text>;
+	}
 
 	return (
 		<SafeAreaView>
-			<Text>{ 'All Movies' }</Text>
-			<TouchableOpacity onPress={handleMovieItemClick}>
-				<Text>{ 'Star Trek: Insurrection' }</Text>
-			</TouchableOpacity>
+			<ScrollView>
+				<Text>{ `All Moviess (${movies.length})` }</Text>
+				{
+					movies.map(movie => (
+						<TouchableOpacity key={movie.id} style={{ paddingVertical: 8 }} onPress={() => handleMovieItemClick(movie.id)}>
+							<Text>{ movie.id }</Text>
+						</TouchableOpacity>
+					))
+				}
+			</ScrollView>
 		</SafeAreaView>
 	);
 }

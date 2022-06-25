@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Clock } from 'phosphor-react-native';
 import { Colors, Spacing } from 'src/constants/theme';
 import { MovieInfoFormatting } from 'src/utils/helpers';
-import { MovieTitleProps } from 'src/types/types';
+import { MovieTitleProps } from 'src/types';
 
 const movieTitleStyles = StyleSheet.create({
 	outerContainer: {
@@ -24,6 +24,7 @@ const movieTitleStyles = StyleSheet.create({
 		fontSize: 22,
 		fontWeight: 'bold',
 		marginBottom: Spacing.SPACING_0,
+		maxWidth: 300,
 	},
 	releaseDateContainer: {
 		display: 'flex',
@@ -58,7 +59,7 @@ export default function MovieTitle(props: MovieTitleProps) {
 	return (
 		<View style={movieTitleStyles.outerContainer}>
 			<View style={movieTitleStyles.scoreContainer}>
-				<Text style={scoreTextStyles}>{ score }</Text>
+				<Text style={scoreTextStyles}>{ score.toFixed(1) }</Text>
 			</View>
 			<View>
 				<Text style={movieTitleStyles.titleContainer}>{ title }</Text>
