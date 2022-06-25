@@ -1,5 +1,5 @@
-import { Movie } from '../models';
-import { MovieDetailsDTO } from '../models/dtos/movie_details_dto';
+import { Movie } from 'src/models';
+import { MovieDetailsDTO } from 'src/models/dtos/movie_details_dto';
 
 export default class Services {
 	private static async apiFetch<T>(endpoint: string): Promise<T> {

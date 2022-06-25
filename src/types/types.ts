@@ -1,6 +1,6 @@
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Movie } from '../models';
+import { Movie } from 'src/models';
 
 /* Components props */
 export type DividerProps = {
@@ -28,9 +28,8 @@ export type BottomNavigationStack = {
 }
 export type BottomPropsStack = BottomTabNavigationProp<BottomNavigationStack>;
 
-/* HomeStackNavigation */
 export type HomeNavigationStack = {
 	AllMoviesScreen: undefined,
-	MovieDetailsScreen: MovieDetailsScreenProps,
+	MovieDetailsScreen: Pick<MovieDetailsScreenProps, 'movieId'>,
 }
 export type HomePropsStack = NativeStackNavigationProp<HomeNavigationStack>;

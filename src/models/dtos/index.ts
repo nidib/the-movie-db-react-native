@@ -1,1 +1,1 @@
-export { default as MovieDetailsDTO } from './movie_details_dto';
+export { type MovieDetailsDTO } from 'src/models/dtos/movie_details_dto';

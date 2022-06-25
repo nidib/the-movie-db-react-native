@@ -1,9 +1,9 @@
 import React, { Fragment, useMemo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Clock } from 'phosphor-react-native';
-import { Colors, Spacing } from '../constants/theme';
-import { MovieInfoFormatting } from '../utils/helpers';
-import { MovieTitleProps } from '../types/types';
+import { Colors, Spacing } from 'src/constants/theme';
+import { MovieInfoFormatting } from 'src/utils/helpers';
+import { MovieTitleProps } from 'src/types/types';
 
 const movieTitleStyles = StyleSheet.create({
 	outerContainer: {

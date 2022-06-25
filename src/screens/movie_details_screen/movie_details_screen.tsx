@@ -6,12 +6,11 @@ import {
 	Text,
 	View,
 } from 'react-native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Colors, Spacing } from '../constants/theme';
-import { Movie } from '../models';
-import { Divider, MovieCoverHeader, MovieTitle } from '../components';
-import { HomeNavigationStack } from '../types/types';
-import { Logger } from '../utils/helpers';
+import { Colors, Spacing } from 'src/constants/theme';
+import { Movie } from 'src/models';
+import { Divider, MovieCoverHeader, MovieTitle } from 'src/components';
+import { Logger } from 'src/utils/helpers';
+import { MovieDetailsScreenProps } from 'src/types/types';
 
 const movieDetailsScreenStyles = StyleSheet.create({
 	safeAreaView: {
@@ -34,9 +33,8 @@ const movieDetailsScreenStyles = StyleSheet.create({
 	},
 });
 
-export default function MovieDetailsScreen(props: NativeStackScreenProps<HomeNavigationStack, 'MovieDetailsScreen'>) {
-	const { route } = props;
-	const { movieProvider, movieId } = route.params;
+export default function MovieDetailsScreen(props: MovieDetailsScreenProps) {
+	const { movieId, movieProvider } = props;
 	const [isLiked, setIsLiked] = useState(false);
 	const [movie, setMovie] = useState<Movie | null>(null);
 	const handleFavoriteIconClick = useCallback(() => setIsLiked(prevState => !prevState), []);

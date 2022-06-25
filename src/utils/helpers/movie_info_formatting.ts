@@ -1,4 +1,4 @@
-import { Colors } from '../../constants/theme';
+import { Colors } from 'src/constants/theme';
 
 export default class MovieInfoFormatting {
 	static getMovieDurationFormatted(duration: number): string {

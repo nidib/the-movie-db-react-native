@@ -1,8 +1,8 @@
 import React from 'react';
 import { createNativeStackNavigator, NativeStackNavigationOptions } from '@react-navigation/native-stack';
-import { Colors } from '../constants/theme';
-import { AllMoviesScreen, MovieDetailsScreen } from '../screens';
-import { HomeNavigationStack } from '../types/types';
+import { Colors } from 'src/constants/theme';
+import { AllMoviesScreen, MovieDetailsScreenWrapper } from 'src/screens';
+import { HomeNavigationStack } from 'src/types/types';
 
 const { Group, Navigator, Screen } = createNativeStackNavigator<HomeNavigationStack>();
 const homeStackNavigationOptions: NativeStackNavigationOptions = {
@@ -29,7 +29,7 @@ export default function HomeStackNavigation() {
 				<Screen name={'AllMoviesScreen'} component={AllMoviesScreen} options={allMoviesScreenNavigationOptions} />
 			</Group>
 			<Group screenOptions={movieDetailsNavigationOptions}>
-				<Screen name={'MovieDetailsScreen'} component={MovieDetailsScreen} options={movieDetailsScreenNavigationOptions} />
+				<Screen name={'MovieDetailsScreen'} component={MovieDetailsScreenWrapper} options={movieDetailsScreenNavigationOptions} />
 			</Group>
 		</Navigator>
 	);

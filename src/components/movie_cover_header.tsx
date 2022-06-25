@@ -7,8 +7,8 @@ import {
 } from 'react-native';
 import { HeartStraight } from 'phosphor-react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { Colors, Spacing } from '../constants/theme';
-import { MovieCoverHeaderProps } from '../types/types';
+import { Colors, Spacing } from 'src/constants/theme';
+import { MovieCoverHeaderProps } from 'src/types/types';
 
 const linearGradientColors = ['transparent', Colors.BLACK];
 

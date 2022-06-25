@@ -1,10 +1,10 @@
 import React from 'react';
 import { BottomTabNavigationOptions, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { HeartStraight, HouseLine } from 'phosphor-react-native';
-import { FavoritesScreen } from '../screens';
-import HomeStackNavigation from './home_stack_navigation';
-import { BottomNavigationStack } from '../types/types';
-import { Colors } from '../constants/theme';
+import { FavoritesScreen } from 'src/screens';
+import { HomeStackNavigation } from 'src/navigations';
+import { BottomNavigationStack } from 'src/types/types';
+import { Colors } from 'src/constants/theme';
 
 function getHomeTabIcon(props: { focused: boolean }) {
 	const weight = props.focused ? 'fill' : 'bold';

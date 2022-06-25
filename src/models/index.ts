@@ -1,1 +1,1 @@
-export { default as Movie } from './movie';
+export { default as Movie } from 'src/models/movie';

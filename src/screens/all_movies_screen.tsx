@@ -1,17 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useCallback } from 'react';
 import { SafeAreaView, Text, TouchableOpacity } from 'react-native';
-import { Movie } from '../models';
-import { HomePropsStack } from '../types/types';
-import { MOVIE_MOCK } from '../_temp/mocks';
+import { HomePropsStack } from 'src/types/types';
 
 export default function AllMoviesScreen() {
 	const navigation = useNavigation<HomePropsStack>();
 	const handleMovieItemClick = useCallback(() => {
-		navigation.navigate('MovieDetailsScreen', {
-			movieId: 200,
-			movieProvider: _movieId => Promise.resolve(new Movie(MOVIE_MOCK)),
-		});
+		navigation.navigate('MovieDetailsScreen', { movieId: 200 });
 	}, []);
 
 	return (

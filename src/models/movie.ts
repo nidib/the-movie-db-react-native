@@ -1,4 +1,4 @@
-import { MovieDetailsDTO } from './dtos/movie_details_dto';
+import { MovieDetailsDTO } from 'src/models/dtos/movie_details_dto';
 
 export default class Movie {
 	public id: number;

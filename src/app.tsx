@@ -1,18 +1,14 @@
+import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import {
-	SafeAreaView,
-	Text,
-	View,
-} from 'react-native';
+import { StatusBar } from 'react-native';
+import { Colors } from 'src/constants/theme';
+import { BottomTabNavigation } from 'src/navigations';
 
-function App() {
+export default function App() {
 	return (
-		<SafeAreaView>
-			<View>
-				<Text>{ 'The Movie DB' }</Text>
-			</View>
-		</SafeAreaView>
+		<NavigationContainer>
+			<StatusBar barStyle={'light-content'} backgroundColor={Colors.BLACK} />
+			<BottomTabNavigation />
+		</NavigationContainer>
 	);
 }
-
-export default App;

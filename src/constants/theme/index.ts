@@ -1,2 +1,2 @@
-export { default as Colors } from './colors';
-export { default as Spacing } from './spacing';
+export { default as Colors } from 'src/constants/theme/colors';
+export { default as Spacing } from 'src/constants/theme/spacing';
