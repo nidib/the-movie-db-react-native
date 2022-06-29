@@ -4,7 +4,7 @@ import { HeartStraight } from 'phosphor-react-native';
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
 import { Colors, Spacing } from 'src/constants/theme';
-import { MovieCoverHeaderProps } from 'src/types';
+import { MovieCoverHeaderProps } from 'src/@types';
 import ApiUrls from 'src/constants/api_urls';
 
 const linearGradientColors = ['transparent', Colors.BLACK];

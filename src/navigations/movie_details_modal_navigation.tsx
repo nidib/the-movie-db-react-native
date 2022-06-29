@@ -1,10 +1,10 @@
 import React from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { MovieDetailsScreen } from 'src/screens';
-import { HomeNavigationStack } from 'src/types';
+import { RootNavigationStack } from 'src/@types';
 import Services from 'src/services/services';
+import { MovieDetailsScreen } from 'src/screens/movie_details_screen';
 
-export default function MovieDetailsScreenWrapper(props: NativeStackScreenProps<HomeNavigationStack, 'MovieDetailsScreen'>) {
+export function MovieDetailsModalNavigation(props: NativeStackScreenProps<RootNavigationStack, 'MovieDetailsModalScreen'>) {
 	const { route } = props;
 	const { movieId } = route.params;
 

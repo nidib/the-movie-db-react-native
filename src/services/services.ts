@@ -3,7 +3,7 @@ import { MovieDetails } from 'src/models/movie_details';
 import { MovieDetailsDTO, MoviesByGenreDTO } from 'src/models/movie_dtos';
 import { Logger } from 'src/utils/helpers';
 import MovieFactory from 'src/models/factories/movie_factory';
-import { Map, Optional } from 'src/types';
+import { Map, Optional } from 'src/@types';
 import api from 'src/services/api';
 
 const cache: Map<any> = {};

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import Svg, { Rect } from 'react-native-svg';
-import { DividerProps } from 'src/types';
+import { DividerProps } from 'src/@types';
 
 function Divider(props: DividerProps) {
 	const { color, width } = props;

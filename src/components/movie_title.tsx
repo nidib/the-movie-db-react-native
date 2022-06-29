@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Clock } from 'phosphor-react-native';
 import { Colors, Spacing } from 'src/constants/theme';
 import { MovieInfoFormatting } from 'src/utils/helpers';
-import { MovieTitleProps } from 'src/types';
+import { MovieTitleProps } from 'src/@types';
 
 const movieTitleStyles = StyleSheet.create({
 	outerContainer: {

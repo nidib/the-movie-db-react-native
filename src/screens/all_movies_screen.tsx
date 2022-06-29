@@ -8,15 +8,14 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { MovieByGenre } from 'src/models/movie_by_genre';
 import Services from 'src/services/services';
-import { HomePropsStack, Optional } from 'src/types';
+import { HomePropsStack, Optional } from 'src/@types';
 import { Logger } from 'src/utils/helpers';
+import { movieDetailsModalScreenID } from 'src/navigations/root_navigation';
 
-export default function AllMoviesScreen() {
+export function AllMoviesScreen() {
 	const navigation = useNavigation<HomePropsStack>();
 	const [movies, setMovies] = useState<Optional<MovieByGenre[]>>([]);
-	const handleMovieItemClick = useCallback((movieId: string | number) => {
-		navigation.navigate('MovieDetailsScreen', { movieId });
-	}, []);
+	const handleMovieItemClick = useCallback((movieId: number) => navigation.navigate(movieDetailsModalScreenID, { movieId }), []);
 
 	useEffect(() => {
 		Services.getMoviesByGenre(16)
