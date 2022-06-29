@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
 	FlatList,
 	ListRenderItem,
@@ -8,10 +8,10 @@ import {
 	Text,
 	TouchableOpacity,
 } from 'react-native';
-import { Colors } from 'src/constants/theme';
-import { movieDetailsModalScreenID } from 'src/navigations/root_navigation';
 import { HomePropsStack } from 'src/@types';
-import { Storage } from 'src/utils/helpers';
+import { Colors } from 'src/constants/theme/colors';
+import { movieDetailsModalScreenID } from 'src/navigations/root_navigation';
+import { Storage } from 'src/utils/helpers/storage';
 
 const styles = StyleSheet.create({
 	screen: {

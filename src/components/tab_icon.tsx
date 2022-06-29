@@ -1,6 +1,6 @@
 import { HeartStraight, HouseLine, IconProps } from 'phosphor-react-native';
 import React from 'react';
-import { Colors } from 'src/constants/theme';
+import { Colors } from 'src/constants/theme/colors';
 
 type TabIconProps = {
 	focused: boolean,

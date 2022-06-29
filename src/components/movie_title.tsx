@@ -1,9 +1,10 @@
+import { Clock } from 'phosphor-react-native';
 import React, { Fragment, useMemo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Clock } from 'phosphor-react-native';
-import { Colors, Spacing } from 'src/constants/theme';
-import { MovieInfoFormatting } from 'src/utils/helpers';
 import { MovieTitleProps } from 'src/@types';
+import { Colors } from 'src/constants/theme/colors';
+import { Spacing } from 'src/constants/theme/spacing';
+import { MovieInfoFormatting } from 'src/utils/helpers/movie_info_formatting';
 
 const movieTitleStyles = StyleSheet.create({
 	outerContainer: {
@@ -44,7 +45,7 @@ const movieTitleStyles = StyleSheet.create({
 	},
 });
 
-export default function MovieTitle(props: MovieTitleProps) {
+export function MovieTitle(props: MovieTitleProps) {
 	const {
 		duration,
 		releaseDate,

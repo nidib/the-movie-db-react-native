@@ -1,5 +1,5 @@
-import React from 'react';
 import { createNativeStackNavigator, NativeStackNavigationOptions } from '@react-navigation/native-stack';
+import React from 'react';
 import { RootNavigationStack } from 'src/@types';
 import { MainNavigation } from 'src/navigations/main_navigation';
 import { MovieDetailsModalNavigation } from 'src/navigations/movie_details_modal_navigation';

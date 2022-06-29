@@ -1,11 +1,12 @@
+import { HeartStraight } from 'phosphor-react-native';
 import React, { useMemo } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { HeartStraight } from 'phosphor-react-native';
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
-import { Colors, Spacing } from 'src/constants/theme';
 import { MovieCoverHeaderProps } from 'src/@types';
-import ApiUrls from 'src/constants/api_urls';
+import { ApiUrls } from 'src/constants/api_urls';
+import { Colors } from 'src/constants/theme/colors';
+import { Spacing } from 'src/constants/theme/spacing';
 
 const linearGradientColors = ['transparent', Colors.BLACK];
 
@@ -26,7 +27,7 @@ const movieCoverHeaderStyles = StyleSheet.create({
 	},
 });
 
-function MovieCoverHeader(props: MovieCoverHeaderProps) {
+export function MovieCoverHeader(props: MovieCoverHeaderProps) {
 	const {
 		cover,
 		isLiked,
@@ -57,5 +58,3 @@ MovieCoverHeader.defaultProps = {
 	showFavoriteIcon: true,
 	onFavoriteIconClick: undefined,
 };
-
-export default MovieCoverHeader;

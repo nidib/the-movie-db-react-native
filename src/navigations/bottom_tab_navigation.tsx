@@ -1,10 +1,10 @@
-import React from 'react';
 import { BottomTabNavigationOptions, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React from 'react';
 import { BottomNavigationStack } from 'src/@types';
-import { Colors } from 'src/constants/theme';
+import { FavoritesTabIcon, HomeTabIcon } from 'src/components/tab_icon';
+import { Colors } from 'src/constants/theme/colors';
 import { AllMoviesScreen } from 'src/screens/all_movies_screen';
 import { FavoritesScreen } from 'src/screens/favorites_screen';
-import { FavoritesTabIcon, HomeTabIcon } from 'src/components/tab_icon';
 
 const { Navigator: Tabs, Screen: Tab } = createBottomTabNavigator<BottomNavigationStack>();
 

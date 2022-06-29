@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useEffect, useState } from 'react';
 import {
 	SafeAreaView,
@@ -5,12 +6,11 @@ import {
 	Text,
 	TouchableOpacity,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { MovieByGenre } from 'src/models/movie_by_genre';
-import Services from 'src/services/services';
 import { HomePropsStack, Optional } from 'src/@types';
-import { Logger } from 'src/utils/helpers';
+import { MovieByGenre } from 'src/models/movie_by_genre';
 import { movieDetailsModalScreenID } from 'src/navigations/root_navigation';
+import { Services } from 'src/services/services';
+import { Logger } from 'src/utils/helpers/logger';
 
 export function AllMoviesScreen() {
 	const navigation = useNavigation<HomePropsStack>();

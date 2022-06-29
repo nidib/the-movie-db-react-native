@@ -7,11 +7,15 @@ import {
 	View,
 } from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
-import { Colors, Spacing } from 'src/constants/theme';
-import { Divider, MovieCoverHeader, MovieTitle } from 'src/components';
-import { Logger, Storage } from 'src/utils/helpers';
 import { MovieDetailsScreenProps, Optional } from 'src/@types';
+import { Divider } from 'src/components/divider';
+import { MovieCoverHeader } from 'src/components/movie_cover_header';
+import { MovieTitle } from 'src/components/movie_title';
+import { Colors } from 'src/constants/theme/colors';
+import { Spacing } from 'src/constants/theme/spacing';
 import { MovieDetails } from 'src/models/movie_details';
+import { Logger } from 'src/utils/helpers/logger';
+import { Storage } from 'src/utils/helpers/storage';
 
 const movieDetailsScreenStyles = StyleSheet.create({
 	safeAreaView: {

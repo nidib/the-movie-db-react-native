@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default class Storage {
+export class Storage {
 	public static async getLikedMovies() {
 		const items = await AsyncStorage.getItem('LikedMovies') || '[]';
 		const itemsSet = new Set<number>(JSON.parse(items));
