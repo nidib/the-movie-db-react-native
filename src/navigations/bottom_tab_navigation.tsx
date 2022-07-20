@@ -1,44 +1,37 @@
-import React from 'react';
 import { BottomTabNavigationOptions, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { HeartStraight, HouseLine } from 'phosphor-react-native';
-import { FavoritesScreen } from 'src/screens';
-import { HomeStackNavigation } from 'src/navigations';
-import { BottomNavigationStack } from 'src/types';
-import { Colors } from 'src/constants/theme';
+import React from 'react';
+import { BottomNavigationStack } from 'src/@types';
+import { FavoritesTabIcon, ExploreTabIcon, SearchTabIcon } from 'src/components/tab_icon';
+import { Colors } from 'src/constants/theme/colors';
+import { AllMoviesScreen } from 'src/screens/all_movies_screen';
+import { FavoritesScreen } from 'src/screens/favorites_screen';
+import { SearchScreen } from 'src/screens/search_screen';
 
-function getHomeTabIcon(props: { focused: boolean }) {
-	const weight = props.focused ? 'fill' : 'bold';
+const { Navigator: Tabs, Screen: Tab } = createBottomTabNavigator<BottomNavigationStack>();
 
-	return <HouseLine weight={weight} color={Colors.WHITE} />;
-}
-
-function getFavoritesTabIcon(props: { focused: boolean }) {
-	const weight = props.focused ? 'fill' : 'bold';
-
-	return <HeartStraight weight={weight} color={Colors.WHITE} />;
-}
-
-const navigatorScreenOptions: BottomTabNavigationOptions = {
-	headerShown: false,
+const tabScreenOptions: BottomTabNavigationOptions = {
 	tabBarShowLabel: false,
 	tabBarStyle: { backgroundColor: Colors.BLACK },
+	headerShown: false,
 };
-const homeTabOptions: BottomTabNavigationOptions = {
-	tabBarIcon: getHomeTabIcon,
-};
-const favoritesTabOptions: BottomTabNavigationOptions = {
-	tabBarIcon: getFavoritesTabIcon,
-	headerTintColor: Colors.WHITE,
-	headerStyle: { backgroundColor: Colors.BLACK },
-	headerShown: true,
-};
-const { Navigator, Screen } = createBottomTabNavigator<BottomNavigationStack>();
+const exploreTabOptions: BottomTabNavigationOptions = { tabBarIcon: ExploreTabIcon, tabBarShowLabel: false };
 
-export default function BottomTabNavigation() {
+const searchTabOptions: BottomTabNavigationOptions = { tabBarIcon: SearchTabIcon, tabBarShowLabel: false };
+
+const favoritesTabOptions: BottomTabNavigationOptions = { tabBarIcon: FavoritesTabIcon, tabBarShowLabel: false };
+
+export const exploreTabID = 'HomeTab';
+
+export const searchTabID = 'SearchTab';
+
+export const favoritesTabID = 'FavoritesTab';
+
+export function BottomTabNavigation() {
 	return (
-		<Navigator screenOptions={navigatorScreenOptions}>
-			<Screen name={'Home'} component={HomeStackNavigation} options={homeTabOptions} />
-			<Screen name={'Favorites'} component={FavoritesScreen} options={favoritesTabOptions} />
-		</Navigator>
+		<Tabs screenOptions={tabScreenOptions}>
+			<Tab name={exploreTabID} component={AllMoviesScreen} options={exploreTabOptions} />
+			<Tab name={searchTabID} component={SearchScreen} options={searchTabOptions} />
+			<Tab name={favoritesTabID} component={FavoritesScreen} options={favoritesTabOptions} />
+		</Tabs>
 	);
 }

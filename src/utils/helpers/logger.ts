@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-export default class Logger {
+export class Logger {
 	public static debug(...args: any): void {
 		console.debug(...args);
 	}

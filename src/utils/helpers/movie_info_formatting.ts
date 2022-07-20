@@ -1,6 +1,6 @@
-import { Colors } from 'src/constants/theme';
+import { Colors } from 'src/constants/theme/colors';
 
-export default class MovieInfoFormatting {
+export class MovieInfoFormatting {
 	public static getMovieDurationFormatted(duration: number): string {
 		const hours = Math.floor(duration / 60);
 		const minutes = duration % 60;

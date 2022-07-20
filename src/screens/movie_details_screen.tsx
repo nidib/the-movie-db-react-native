@@ -6,11 +6,16 @@ import {
 	Text,
 	View,
 } from 'react-native';
-import { Colors, Spacing } from 'src/constants/theme';
-import { Divider, MovieCoverHeader, MovieTitle } from 'src/components';
-import { Logger } from 'src/utils/helpers';
-import { MovieDetailsScreenProps, Optional } from 'src/types';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+import { MovieDetailsScreenProps, Optional } from 'src/@types';
+import { Divider } from 'src/components/divider';
+import { MovieCoverHeader } from 'src/components/movie_cover_header';
+import { MovieTitle } from 'src/components/movie_title';
+import { Colors } from 'src/constants/theme/colors';
+import { Spacing } from 'src/constants/theme/spacing';
 import { MovieDetails } from 'src/models/movie_details';
+import { Logger } from 'src/utils/helpers/logger';
+import { Storage } from 'src/utils/helpers/storage';
 
 const movieDetailsScreenStyles = StyleSheet.create({
 	safeAreaView: {
@@ -33,13 +38,25 @@ const movieDetailsScreenStyles = StyleSheet.create({
 	},
 });
 
-export default function MovieDetailsScreen(props: MovieDetailsScreenProps) {
+const hapticFeedbackOptions = {
+	enableVibrateFallback: true,
+	ignoreAndroidSystemSettings: false,
+};
+
+export function MovieDetailsScreen(props: MovieDetailsScreenProps) {
 	const { movieId, movieProvider } = props;
 	const [isLiked, setIsLiked] = useState(false);
 	const [movie, setMovie] = useState<Optional<MovieDetails>>(null);
-	const handleFavoriteIconClick = useCallback(() => {
-		setIsLiked(prevState => !prevState);
+
+	const handleFavoriteIconClick = useCallback(async () => {
+		const likedMovies = await Storage.getLikedMovies();
+		const newLikedMovies = await Storage.updateLikedMovies(movieId, likedMovies);
+		const isMovieLiked = newLikedMovies.has(movieId);
+
+		ReactNativeHapticFeedback.trigger('impactLight', hapticFeedbackOptions);
+		setIsLiked(isMovieLiked);
 	}, []);
+
 	const getMovie = useCallback(async () => {
 		try {
 			setMovie(await movieProvider(movieId));
@@ -48,12 +65,21 @@ export default function MovieDetailsScreen(props: MovieDetailsScreenProps) {
 		}
 	}, []);
 
+	const getInitialLike = useCallback(async () => {
+		const itemsSet = await Storage.getLikedMovies();
+
+		setIsLiked(itemsSet.has(movieId));
+	}, []);
+
 	useEffect(() => {
+		getInitialLike();
 		getMovie();
 	}, []);
 
 	if (!movie) {
-		return <Text>{ 'Loading...' }</Text>;
+		return (
+			<SafeAreaView style={movieDetailsScreenStyles.safeAreaView} />
+		);
 	}
 
 	const {
