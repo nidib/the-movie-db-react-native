@@ -1,11 +1,7 @@
-import { HeartStraight, HouseLine, IconProps } from 'phosphor-react-native';
+import { HeartStraight, Compass, MagnifyingGlass } from 'phosphor-react-native';
 import React from 'react';
+import { TabIconProps } from 'src/@types';
 import { Colors } from 'src/constants/theme/colors';
-
-type TabIconProps = {
-	focused: boolean,
-	icon: React.FC<IconProps>
-}
 
 function TabIcon(props: TabIconProps) {
 	const { focused, icon: Icon } = props;
@@ -14,10 +10,16 @@ function TabIcon(props: TabIconProps) {
 	return <Icon weight={weight} color={Colors.WHITE} />;
 }
 
-export function HomeTabIcon(props: Pick<TabIconProps, 'focused'>) {
+export function ExploreTabIcon(props: Pick<TabIconProps, 'focused'>) {
 	const { focused } = props;
 
-	return <TabIcon icon={HouseLine} focused={focused} />;
+	return <TabIcon icon={Compass} focused={focused} />;
+}
+
+export function SearchTabIcon(props: Pick<TabIconProps, 'focused'>) {
+	const { focused } = props;
+
+	return <TabIcon icon={MagnifyingGlass} focused={focused} />;
 }
 
 export function FavoritesTabIcon(props: Pick<TabIconProps, 'focused'>) {

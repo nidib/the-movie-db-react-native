@@ -4,6 +4,9 @@
 		"jest": true,
 		"es2021": true
 	},
+	"globals": {
+		"JSX": "readonly"
+	},
 	"settings": {
 		"import/parsers": {
 			"@typescript-eslint/parser": [".ts", ".tsx", ".js"]
@@ -33,7 +36,7 @@
 		"@typescript-eslint"
 	],
 	"rules": {
-		"indent": ["error", "tab"],
+		"indent": ["error", "tab", { "SwitchCase": 1 }],
 		"no-tabs": ["error", { "allowIndentationTabs": true }],
 		"react/jsx-indent": [2, "tab"],
 		"react/jsx-indent-props": [2, "tab"],

@@ -1,44 +1,86 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useScrollToTop } from '@react-navigation/native';
+import React, { useCallback, useMemo, useRef } from 'react';
 import {
+	FlatList,
+	ListRenderItemInfo,
 	SafeAreaView,
-	ScrollView,
-	Text,
-	TouchableOpacity,
+	StyleSheet,
 } from 'react-native';
-import { HomePropsStack, Optional } from 'src/@types';
-import { MovieByGenre } from 'src/models/movie_by_genre';
-import { movieDetailsModalScreenID } from 'src/navigations/root_navigation';
-import { Services } from 'src/services/services';
-import { Logger } from 'src/utils/helpers/logger';
+import { CategoryTitle } from 'src/components/category_title';
+import { MovieList } from 'src/components/movie_list';
+import { Colors } from 'src/constants/theme/colors';
+
+type CategoryListItem = {
+	id: string
+	isTitle?: boolean
+	render: () => JSX.Element
+}
+
+const categoriesList: CategoryListItem[] = [{
+	id: 'ANIMATION',
+	isTitle: true,
+	render: () => <CategoryTitle title={'Animation'} />,
+}, {
+	id: 'ANIMATION_CONTENT',
+	render: () => <MovieList categoryId={16} />,
+}, {
+	id: 'ACTION',
+	isTitle: true,
+	render: () => <CategoryTitle title={'Action'} />,
+}, {
+	id: 'ACTION_CONTENT',
+	render: () => <MovieList categoryId={28} />,
+}, {
+	id: 'COMEDY',
+	isTitle: true,
+	render: () => <CategoryTitle title={'Comedy'} />,
+}, {
+	id: 'COMEDY_CONTENT',
+	render: () => <MovieList categoryId={35} />,
+}, {
+	id: 'DRAMA',
+	isTitle: true,
+	render: () => <CategoryTitle title={'Drama'} />,
+}, {
+	id: 'DRAMA_CONTENT',
+	render: () => <MovieList categoryId={18} />,
+}, {
+	id: 'DOCUMENTARY',
+	isTitle: true,
+	render: () => <CategoryTitle title={'Documentary'} />,
+}, {
+	id: 'DOCUMENTARY_CONTENT',
+	render: () => <MovieList categoryId={99} />,
+}];
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		backgroundColor: Colors.BLACK,
+	},
+});
 
 export function AllMoviesScreen() {
-	const navigation = useNavigation<HomePropsStack>();
-	const [movies, setMovies] = useState<Optional<MovieByGenre[]>>([]);
-	const handleMovieItemClick = useCallback((movieId: number) => navigation.navigate(movieDetailsModalScreenID, { movieId }), []);
+	const ref = useRef(null);
+	const stickyHeaderIndices: number[] = useMemo(() => {
+		let list: number[] = [];
+		categoriesList.forEach((item, i) => item.isTitle && list.push(i));
+		return list;
+	}, [categoriesList]);
+	const renderItem = useCallback((current: ListRenderItemInfo<CategoryListItem>) => current.item.render(), []);
+	const keyExtractor = useCallback((item: CategoryListItem) => item.id, []);
 
-	useEffect(() => {
-		Services.getMoviesByGenre(16)
-			.then(setMovies)
-			.catch(Logger.error);
-	}, []);
-
-	if (!movies) {
-		return <Text>{ 'Something went wrong while getting the movies' }</Text>;
-	}
+	useScrollToTop(ref);
 
 	return (
-		<SafeAreaView>
-			<ScrollView>
-				<Text>{ `All Moviess (${movies.length})` }</Text>
-				{
-					movies.map(movie => (
-						<TouchableOpacity key={movie.id} style={{ paddingVertical: 8 }} onPress={() => handleMovieItemClick(movie.id)}>
-							<Text>{ movie.id }</Text>
-						</TouchableOpacity>
-					))
-				}
-			</ScrollView>
+		<SafeAreaView style={styles.container}>
+			<FlatList
+				data={categoriesList}
+				renderItem={renderItem}
+				stickyHeaderIndices={stickyHeaderIndices}
+				keyExtractor={keyExtractor}
+				ref={ref}
+			/>
 		</SafeAreaView>
 	);
 }

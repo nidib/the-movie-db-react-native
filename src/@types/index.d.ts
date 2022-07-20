@@ -1,7 +1,9 @@
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { IconProps } from 'phosphor-react-native';
+import React from 'react';
 import { MovieDetails } from 'src/models/movie_details';
-import { favoritesTabID, homeTabID } from 'src/navigations/bottom_tab_navigation';
+import { favoritesTabID, exploreTabID, searchTabID } from 'src/navigations/bottom_tab_navigation';
 import { mainScreenID, movieDetailsModalScreenID } from 'src/navigations/root_navigation';
 
 export type Map<Z> = { [key: string]: Z; };
@@ -26,8 +28,14 @@ export type MovieDetailsScreenProps = {
 	movieProvider: (movieId: MovieDetails['id']) => Promise<Optional<MovieDetails>>;
 }
 
+export type TabIconProps = {
+	focused: boolean,
+	icon: React.FC<IconProps>
+}
+
 export type BottomNavigationStack = {
-	[homeTabID]: undefined
+	[exploreTabID]: undefined
+	[searchTabID]: undefined
 	[favoritesTabID]: undefined
 }
 export type BottomPropsStack = BottomTabNavigationProp<BottomNavigationStack>;

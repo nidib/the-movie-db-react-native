@@ -8,8 +8,8 @@ const { Navigator: RootNavigator, Screen: RootScreen } = createNativeStackNaviga
 const mainScreenOptions: NativeStackNavigationOptions = { headerShown: false };
 const movieDetailsModalOptions: NativeStackNavigationOptions = { presentation: 'modal', headerShown: false, gestureEnabled: true };
 
-export const mainScreenID = 'MainScreen';
-export const movieDetailsModalScreenID = 'MovieDetailsModalScreen';
+export const mainScreenID = 'MainScreen' as const;
+export const movieDetailsModalScreenID = 'MovieDetailsModalScreen' as const;
 
 export function RootNavigation() {
 	return (

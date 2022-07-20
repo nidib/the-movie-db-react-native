@@ -77,7 +77,9 @@ export function MovieDetailsScreen(props: MovieDetailsScreenProps) {
 	}, []);
 
 	if (!movie) {
-		return <Text>{ 'Loading...' }</Text>;
+		return (
+			<SafeAreaView style={movieDetailsScreenStyles.safeAreaView} />
+		);
 	}
 
 	const {
