@@ -1,7 +1,7 @@
-export default class Colors {
-	public static readonly BLACK: '#000000' = '#000000';
-	public static readonly WHITE: '#FFFFFF' = '#FFFFFF';
-	public static readonly GREEN: '#99c140' = '#99c140';
-	public static readonly YELLOW: '#e7b416' = '#e7b416';
-	public static readonly RED: '#cc3232' = '#cc3232';
+export class Colors {
+	public static readonly BLACK = '#000000' as const;
+	public static readonly WHITE = '#FFFFFF' as const;
+	public static readonly GREEN = '#99c140' as const;
+	public static readonly YELLOW = '#e7b416' as const;
+	public static readonly RED = '#cc3232' as const;
 }

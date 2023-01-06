@@ -1,14 +1,14 @@
+import { Map, Optional } from 'src/@types';
+import { MovieFactory } from 'src/models/factories/movie_factory';
 import { MovieByGenre } from 'src/models/movie_by_genre';
 import { MovieDetails } from 'src/models/movie_details';
 import { MovieDetailsDTO, MoviesByGenreDTO } from 'src/models/movie_dtos';
-import { Logger } from 'src/utils/helpers';
-import MovieFactory from 'src/models/factories/movie_factory';
-import { Map, Optional } from 'src/types';
-import api from 'src/services/api';
+import { api } from 'src/services/api';
+import { Logger } from 'src/utils/helpers/logger';
 
 const cache: Map<any> = {};
 
-export default class Services {
+export class Services {
 	private static async apiFetch<T>(endpoint: string, params: any): Promise<Optional<T>> {
 		let data: T | null = null;
 		let cacheKey: string;
