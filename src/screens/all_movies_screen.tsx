@@ -66,7 +66,7 @@ export function AllMoviesScreen() {
 		let list: number[] = [];
 		categoriesList.forEach((item, i) => item.isTitle && list.push(i));
 		return list;
-	}, [categoriesList]);
+	}, []);
 	const renderItem = useCallback((current: ListRenderItemInfo<CategoryListItem>) => current.item.render(), []);
 	const keyExtractor = useCallback((item: CategoryListItem) => item.id, []);
 

@@ -43,11 +43,11 @@ export function MovieCoverHeader(props: MovieCoverHeaderProps) {
 		<FastImage source={backgroundSource} style={movieCoverHeaderStyles.coverBackground}>
 			<LinearGradient colors={linearGradientColors} style={movieCoverHeaderStyles.linearGradient} />
 			{
-				showFavoriteIcon && (
+				showFavoriteIcon ? (
 					<TouchableOpacity onPress={onFavoriteIconClick} style={movieCoverHeaderStyles.favoriteIcon}>
 						<HeartStraight color={Colors.WHITE} weight={heartWeight} />
 					</TouchableOpacity>
-				)
+				) : null
 			}
 		</FastImage>
 	);

@@ -1,3 +1,4 @@
+import { isNil } from 'lodash';
 import { Clock } from 'phosphor-react-native';
 import React, { Fragment, useMemo } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -69,12 +70,12 @@ export function MovieTitle(props: MovieTitleProps) {
 						{ MovieInfoFormatting.getMovieReleaseDateFormatted(releaseDate) }
 					</Text>
 					{
-						duration && (
+						!isNil(duration) ? (
 							<Fragment>
 								<Clock color={Colors.WHITE} weight={'bold'} size={Spacing.SPACING_2} style={movieTitleStyles.durationIcon} />
 								<Text style={movieTitleStyles.durationText}>{ MovieInfoFormatting.getMovieDurationFormatted(duration) }</Text>
 							</Fragment>
-						)
+						) : null
 					}
 				</View>
 			</View>
