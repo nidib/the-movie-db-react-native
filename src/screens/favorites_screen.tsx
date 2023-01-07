@@ -44,7 +44,7 @@ export function FavoritesScreen() {
 
 	const handleMovieItemClick = useCallback((movieId: number) => {
 		navigation.navigate(movieDetailsModalScreenID, { movieId });
-	}, []);
+	}, [navigation]);
 
 	const renderItem: ListRenderItem<number> = useCallback(({ item }) => {
 		return (
@@ -52,10 +52,10 @@ export function FavoritesScreen() {
 				<Text style={styles.favoriteItemText}>{ item }</Text>
 			</TouchableOpacity>
 		);
-	}, []);
+	}, [handleMovieItemClick]);
 
-	useEffect(() => { getInitialLikedMovies(); }, []);
-	useFocusEffect(useCallback(() => { getInitialLikedMovies(); }, []));
+	useEffect(() => { getInitialLikedMovies(); }, [getInitialLikedMovies]);
+	useFocusEffect(useCallback(() => { getInitialLikedMovies(); }, [getInitialLikedMovies]));
 
 	return (
 		<SafeAreaView style={styles.screen}>

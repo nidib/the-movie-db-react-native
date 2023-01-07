@@ -1,8 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StorageKeys } from 'src/constants/storage_keys';
 
 export class Storage {
 	public static async getLikedMovies() {
-		const items = await AsyncStorage.getItem('LikedMovies') || '[]';
+		const items = await AsyncStorage.getItem(StorageKeys.LIKED_MOVIES) || '[]';
 		const itemsSet = new Set<number>(JSON.parse(items));
 
 		return itemsSet;
@@ -17,7 +18,7 @@ export class Storage {
 			newLikedMovies.add(id);
 		}
 
-		await AsyncStorage.setItem('LikedMovies', JSON.stringify(Array.from(newLikedMovies)));
+		await AsyncStorage.setItem(StorageKeys.LIKED_MOVIES, JSON.stringify(Array.from(newLikedMovies)));
 
 		return newLikedMovies;
 	}

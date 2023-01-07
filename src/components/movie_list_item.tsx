@@ -26,7 +26,7 @@ export function MovieListItem(props: MovieCardProps) {
 	const posterSource = useMemo(() => ({
 		uri: poster ? ApiUrls.getImageUrl(poster) : undefined,
 	}), [poster]);
-	const handleMovieItemClick = useCallback(() => navigation.navigate(movieDetailsModalScreenID, { movieId: id }), [id]);
+	const handleMovieItemClick = useCallback(() => navigation.navigate(movieDetailsModalScreenID, { movieId: id }), [id, navigation]);
 
 	return (
 		<TouchableOpacity onPress={handleMovieItemClick}>

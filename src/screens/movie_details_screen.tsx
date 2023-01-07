@@ -55,7 +55,7 @@ export function MovieDetailsScreen(props: MovieDetailsScreenProps) {
 
 		ReactNativeHapticFeedback.trigger('impactLight', hapticFeedbackOptions);
 		setIsLiked(isMovieLiked);
-	}, []);
+	}, [movieId]);
 
 	const getMovie = useCallback(async () => {
 		try {
@@ -63,18 +63,18 @@ export function MovieDetailsScreen(props: MovieDetailsScreenProps) {
 		} catch (e) {
 			Logger.error(e);
 		}
-	}, []);
+	}, [movieId, movieProvider]);
 
 	const getInitialLike = useCallback(async () => {
 		const itemsSet = await Storage.getLikedMovies();
 
 		setIsLiked(itemsSet.has(movieId));
-	}, []);
+	}, [movieId]);
 
 	useEffect(() => {
 		getInitialLike();
 		getMovie();
-	}, []);
+	}, [getInitialLike, getMovie]);
 
 	if (!movie) {
 		return (
