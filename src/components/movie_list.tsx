@@ -9,7 +9,7 @@ import {
 import { MovieListItem } from 'src/components/movie_list_item';
 import { ViewMore } from 'src/components/view_more';
 import { Spacing } from 'src/constants/theme/spacing';
-import { useMoviesByCategoryId } from 'src/hooks/use_movies_by_category_id';
+import { useMoviesByCategoryId } from 'src/hooks/service_hooks';
 import { MovieByGenre } from 'src/models/movie_by_genre';
 
 type MovieListProps = {

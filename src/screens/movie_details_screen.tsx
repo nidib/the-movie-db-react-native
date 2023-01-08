@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 import {
 	SafeAreaView,
 	ScrollView,
@@ -13,8 +13,8 @@ import { MovieCoverHeader } from 'src/components/movie_cover_header';
 import { MovieTitle } from 'src/components/movie_title';
 import { Colors } from 'src/constants/theme/colors';
 import { Spacing } from 'src/constants/theme/spacing';
-import { useMovieDetailsById } from 'src/hooks/use_movie_details_by_id';
-import { Storage } from 'src/utils/helpers/storage';
+import { useMovieDetailsById } from 'src/hooks/service_hooks';
+import { useIsMovieLiked, useMovieLikeToggle } from 'src/hooks/store_hooks';
 
 const movieDetailsScreenStyles = StyleSheet.create({
 	safeAreaView: {
@@ -44,27 +44,14 @@ const hapticFeedbackOptions = {
 
 export function MovieDetailsScreen(props: MovieDetailsScreenProps) {
 	const { movieId } = props;
-	const [isLiked, setIsLiked] = useState(false);
 	const movie = useMovieDetailsById(movieId);
+	const isMovieLiked = useIsMovieLiked(movieId);
+	const toggleMovieLike = useMovieLikeToggle();
 
 	const handleFavoriteIconClick = useCallback(async () => {
-		const likedMovies = await Storage.getLikedMovies();
-		const newLikedMovies = await Storage.updateLikedMovies(movieId, likedMovies);
-		const isMovieLiked = newLikedMovies.has(movieId);
-
+		toggleMovieLike(movieId);
 		ReactNativeHapticFeedback.trigger('impactLight', hapticFeedbackOptions);
-		setIsLiked(isMovieLiked);
-	}, [movieId]);
-
-	const getInitialLike = useCallback(async () => {
-		const itemsSet = await Storage.getLikedMovies();
-
-		setIsLiked(itemsSet.has(movieId));
-	}, [movieId]);
-
-	useEffect(() => {
-		getInitialLike();
-	}, [getInitialLike]);
+	}, [movieId, toggleMovieLike]);
 
 	if (!movie) {
 		return <SafeAreaView style={movieDetailsScreenStyles.safeAreaView} />;
@@ -82,7 +69,7 @@ export function MovieDetailsScreen(props: MovieDetailsScreenProps) {
 	return (
 		<SafeAreaView style={movieDetailsScreenStyles.safeAreaView}>
 			<ScrollView>
-				<MovieCoverHeader cover={cover} onFavoriteIconClick={handleFavoriteIconClick} isLiked={isLiked} />
+				<MovieCoverHeader cover={cover} onFavoriteIconClick={handleFavoriteIconClick} isLiked={isMovieLiked} />
 				<View style={movieDetailsScreenStyles.movieTitleWithDescriptionContainer}>
 					<MovieTitle duration={duration} releaseDate={releaseDate} score={score} title={title} />
 					<View style={movieDetailsScreenStyles.dividerContainer}>
