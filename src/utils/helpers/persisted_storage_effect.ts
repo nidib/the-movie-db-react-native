@@ -3,26 +3,25 @@ import { AtomEffect } from 'recoil';
 
 type PersistedEffectOptions<T> = {
 	storageKey: string;
-	customStorageValueFallback?: string;
-	customDeserializer?: (persistedValue: string) => T;
-	customSerializer?: (persistedValue: T) => string;
+	storageValueFallback: string;
+	deserializer: (persistedValue: string) => T;
+	serializer: (persistedValue: T) => string;
 };
 
 export const persistedEffect = <T>(options: PersistedEffectOptions<T>): AtomEffect<T> => {
 	const {
 		storageKey,
-		customStorageValueFallback = '',
-		customDeserializer = (val: string) => val as T,
-		customSerializer = (val: T) => val as string,
+		storageValueFallback,
+		deserializer,
+		serializer,
 	} = options;
 
 	return ({ setSelf, onSet, trigger }) => {
 		// If there's a persisted value - set it on load
 		const loadPersisted = async () => {
-			const storageValueFallback = customStorageValueFallback ?? '';
 			const savedValue = await AsyncStorage.getItem(storageKey) ?? storageValueFallback;
 
-			setSelf(customDeserializer(savedValue));
+			setSelf(deserializer(savedValue));
 		};
 
 		// Asynchronously set the persisted data
@@ -35,7 +34,7 @@ export const persistedEffect = <T>(options: PersistedEffectOptions<T>): AtomEffe
 			if (isReset) {
 				AsyncStorage.removeItem(storageKey);
 			} else {
-				AsyncStorage.setItem(storageKey, customSerializer(newValue));
+				AsyncStorage.setItem(storageKey, serializer(newValue));
 			}
 		});
 	};

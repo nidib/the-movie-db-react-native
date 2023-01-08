@@ -8,9 +8,9 @@ export const likedMoviesAtom = atom({
 	effects: [
 		persistedEffect<Set<number>>({
 			storageKey: StorageKeys.LIKED_MOVIES,
-			customStorageValueFallback: '[]',
-			customDeserializer: value => new Set(JSON.parse(value)),
-			customSerializer: value => JSON.stringify(Array.from(value)),
+			storageValueFallback: '[]',
+			deserializer: value => new Set(JSON.parse(value)),
+			serializer: value => JSON.stringify(Array.from(value)),
 		}),
 	],
 });
