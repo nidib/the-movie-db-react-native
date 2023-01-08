@@ -1,5 +1,5 @@
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useCallback, useMemo } from 'react';
 import {
 	FlatList,
 	ListRenderItem,
@@ -11,7 +11,7 @@ import {
 import { HomePropsStack } from 'src/@types';
 import { Colors } from 'src/constants/theme/colors';
 import { movieDetailsModalScreenID } from 'src/navigations/root_navigation';
-import { Storage } from 'src/utils/helpers/storage';
+import { useLikedMovies } from 'src/hooks/store_hooks';
 
 const styles = StyleSheet.create({
 	screen: {
@@ -36,11 +36,8 @@ const styles = StyleSheet.create({
 
 export function FavoritesScreen() {
 	const navigation = useNavigation<HomePropsStack>();
-	const [likedMovies, setLikedMovies] = useState<Set<number>>(new Set());
-
-	const getInitialLikedMovies = useCallback(async () => {
-		setLikedMovies(await Storage.getLikedMovies());
-	}, []);
+	const likedMovies = useLikedMovies();
+	const likedMoviesList = useMemo(() => Array.from(likedMovies), [likedMovies]);
 
 	const handleMovieItemClick = useCallback((movieId: number) => {
 		navigation.navigate(movieDetailsModalScreenID, { movieId });
@@ -54,13 +51,10 @@ export function FavoritesScreen() {
 		);
 	}, [handleMovieItemClick]);
 
-	useEffect(() => { getInitialLikedMovies(); }, [getInitialLikedMovies]);
-	useFocusEffect(useCallback(() => { getInitialLikedMovies(); }, [getInitialLikedMovies]));
-
 	return (
 		<SafeAreaView style={styles.screen}>
 			<FlatList
-				data={Array.from(likedMovies)}
+				data={likedMoviesList}
 				renderItem={renderItem}
 				keyExtractor={String}
 			/>
