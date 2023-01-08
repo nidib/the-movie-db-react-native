@@ -7,14 +7,13 @@ import {
 	View,
 } from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
-import { MovieDetailsScreenProps, Optional } from 'src/@types';
+import { MovieDetailsScreenProps } from 'src/@types';
 import { Divider } from 'src/components/divider';
 import { MovieCoverHeader } from 'src/components/movie_cover_header';
 import { MovieTitle } from 'src/components/movie_title';
 import { Colors } from 'src/constants/theme/colors';
 import { Spacing } from 'src/constants/theme/spacing';
-import { MovieDetails } from 'src/models/movie_details';
-import { Logger } from 'src/utils/helpers/logger';
+import { useMovieDetailsById } from 'src/hooks/use_movie_details_by_id';
 import { Storage } from 'src/utils/helpers/storage';
 
 const movieDetailsScreenStyles = StyleSheet.create({
@@ -44,9 +43,9 @@ const hapticFeedbackOptions = {
 };
 
 export function MovieDetailsScreen(props: MovieDetailsScreenProps) {
-	const { movieId, movieProvider } = props;
+	const { movieId } = props;
 	const [isLiked, setIsLiked] = useState(false);
-	const [movie, setMovie] = useState<Optional<MovieDetails>>(null);
+	const movie = useMovieDetailsById(movieId);
 
 	const handleFavoriteIconClick = useCallback(async () => {
 		const likedMovies = await Storage.getLikedMovies();
@@ -57,14 +56,6 @@ export function MovieDetailsScreen(props: MovieDetailsScreenProps) {
 		setIsLiked(isMovieLiked);
 	}, [movieId]);
 
-	const getMovie = useCallback(async () => {
-		try {
-			setMovie(await movieProvider(movieId));
-		} catch (e) {
-			Logger.error(e);
-		}
-	}, [movieId, movieProvider]);
-
 	const getInitialLike = useCallback(async () => {
 		const itemsSet = await Storage.getLikedMovies();
 
@@ -73,13 +64,10 @@ export function MovieDetailsScreen(props: MovieDetailsScreenProps) {
 
 	useEffect(() => {
 		getInitialLike();
-		getMovie();
-	}, [getInitialLike, getMovie]);
+	}, [getInitialLike]);
 
 	if (!movie) {
-		return (
-			<SafeAreaView style={movieDetailsScreenStyles.safeAreaView} />
-		);
+		return <SafeAreaView style={movieDetailsScreenStyles.safeAreaView} />;
 	}
 
 	const {

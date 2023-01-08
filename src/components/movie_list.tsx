@@ -6,11 +6,11 @@ import {
 	StyleSheet,
 	View,
 } from 'react-native';
-import { useMoviesByCategoryId } from 'src/hooks/useMoviesByCategoryId';
-import { MovieByGenre } from 'src/models/movie_by_genre';
+import { MovieListItem } from 'src/components/movie_list_item';
 import { ViewMore } from 'src/components/view_more';
 import { Spacing } from 'src/constants/theme/spacing';
-import { MovieListItem } from './movie_list_item';
+import { useMoviesByCategoryId } from 'src/hooks/use_movies_by_category_id';
+import { MovieByGenre } from 'src/models/movie_by_genre';
 
 type MovieListProps = {
 	categoryId: number
@@ -26,7 +26,8 @@ const movieListStyles = StyleSheet.create({
 
 export function MovieList(props: MovieListProps) {
 	const { categoryId } = props;
-	const { movies } = useMoviesByCategoryId(categoryId);
+	const movies = useMoviesByCategoryId(categoryId);
+
 	const renderItem = useCallback((current: ListRenderItemInfo<MovieByGenre>) => {
 		const { id, poster } = current.item;
 

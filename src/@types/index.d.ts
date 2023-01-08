@@ -24,24 +24,23 @@ export type MovieCoverHeaderProps = {
 export type MovieTitleProps = Pick<MovieDetails, 'duration' | 'releaseDate' | 'score' | 'title'>;
 
 export type MovieDetailsScreenProps = {
-	movieId: MovieDetails['id']
-	movieProvider: (movieId: MovieDetails['id']) => Promise<Optional<MovieDetails>>;
+	movieId: MovieDetails['id'];
 }
 
 export type TabIconProps = {
-	focused: boolean,
-	icon: React.FC<IconProps>
+	focused: boolean;
+	icon: React.FC<IconProps>;
 }
 
 export type BottomNavigationStack = {
-	[exploreTabID]: undefined
-	[searchTabID]: undefined
-	[favoritesTabID]: undefined
+	[exploreTabID]: undefined;
+	[searchTabID]: undefined;
+	[favoritesTabID]: undefined;
 }
 export type BottomPropsStack = BottomTabNavigationProp<BottomNavigationStack>;
 
 export type RootNavigationStack = {
-	[mainScreenID]: undefined,
-	[movieDetailsModalScreenID]: Pick<MovieDetailsScreenProps, 'movieId'>,
+	[mainScreenID]: undefined;
+	[movieDetailsModalScreenID]: Pick<MovieDetailsScreenProps, 'movieId'>;
 }
 export type HomePropsStack = NativeStackNavigationProp<RootNavigationStack>;
