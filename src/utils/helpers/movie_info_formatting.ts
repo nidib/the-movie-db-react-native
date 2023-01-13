@@ -9,7 +9,7 @@ export class MovieInfoFormatting {
 	}
 
 	public static getMovieReleaseDateFormatted(releaseDate: Date): string {
-		return String(releaseDate.getFullYear());
+		return releaseDate.getFullYear().toString();
 	}
 
 	public static getMovieScoreColorFormatted(score: number): string {
