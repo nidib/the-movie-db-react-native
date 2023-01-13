@@ -1,5 +1,6 @@
 import { atom, selectorFamily } from 'recoil';
 import { StorageKeys } from 'src/constants/storage_keys';
+import { isMovieLiked } from 'src/utils/helpers/liked_movies';
 import { persistedEffect } from 'src/utils/helpers/persisted_storage_effect';
 
 export const likedMoviesAtom = atom({
@@ -20,6 +21,6 @@ export const isMovieLikedSelector = selectorFamily({
 	get: (movieId: number) => ({ get }) => {
 		const likedMovies = get(likedMoviesAtom);
 
-		return likedMovies.has(movieId);
+		return isMovieLiked(movieId, likedMovies);
 	},
 });
